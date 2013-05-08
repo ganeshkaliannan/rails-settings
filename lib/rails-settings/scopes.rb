@@ -9,6 +9,11 @@ module RailsSettings
       raise ArgumentError.new('Symbol expected!') unless var.is_a?(Symbol)
       joins("INNER JOIN settings ON #{settings_join_condition} AND settings.var = '#{var}'")
     end
+   
+   def with_settings_value(var,interval)
+      raise ArgumentError.new('Symbol expected!') unless var.is_a?(Symbol)
+      joins("INNER JOIN settings ON #{settings_join_condition} AND settings.var = '#{var}' AND settings.value LIKE '%#{interval}%'")
+    end
 
     def without_settings
       joins("LEFT JOIN settings ON #{settings_join_condition}").
