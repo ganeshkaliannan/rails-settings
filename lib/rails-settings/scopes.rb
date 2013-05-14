@@ -12,11 +12,8 @@ module RailsSettings
    
    def with_settings_value(var,interval)
       raise ArgumentError.new('Symbol expected!') unless var.is_a?(Symbol)
-       if interval == 'weekly'
-         joins("INNER JOIN settings ON #{settings_join_condition} AND settings.var = '#{var}' AND settings.value LIKE '%weekly%'")
-       else
       joins("INNER JOIN settings ON #{settings_join_condition} AND settings.var = '#{var}' AND settings.value LIKE '%#{interval}%'")
-      end
+      
     end
 
     def without_settings
